@@ -93,8 +93,10 @@ def showMenuUtilizador()
 				@serv.printUtilizador()
 			when 4
 				#depositar dinheiro
+				@serv.menuCarregarDinheiro()
 			when 5
 				#levantar dinheiro
+				@serv.menuLevantarDinheiro()
 			else
 				printError(__method__)
 		end

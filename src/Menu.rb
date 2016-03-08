@@ -5,7 +5,7 @@ class Menu
 	end
 	
 	def self.menuUtilizador()
-		return show(['Logout','Consultar Lista de Jogos','Alterar Dados Pessoais','Consultar Dados Pessoais'])
+		return show(['Logout','Consultar Lista de Jogos','Alterar Dados Pessoais','Consultar Dados Pessoais','Carregar Dinheiro','Levantar Dinheiro'])
 	end
 	
 	def self.menuBookie()

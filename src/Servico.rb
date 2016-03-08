@@ -122,6 +122,23 @@ class Servico
 		@loggedIn = @listaBookies[bookie.email]
 	end
 	
+	#Utilizador
+	def menuCarregarDinheiro(ut=@loggedIn)
+		puts "Que valor deseja introduzir?"
+		valor = gets.to_f
+		listaUtilizadores[ut.email].deposit(valor)
+		puts "Agora tem #{listaUtilizadores[ut.email].saldo}$ na sua conta"
+	end
+	
+	def menuLevantarDinheiro(ut=@loggedIn)
+		begin
+			puts "Tem #{listaUtilizadores[ut.email].saldo}$ na sua conta. Que valor deseja levantar?"
+			valor = gets.to_f
+		end while(!(valor <= listaUtilizadores[ut.email].saldo))
+		listaUtilizadores[ut.email].withdraw(valor)
+		puts "Agora tem #{listaUtilizadores[ut.email].saldo}$ na sua conta"
+	end
+	
 	#Bookie
 	def menuCriarJogo(ut=@loggedIn)
 		#lista = @listaEquipas
