@@ -9,6 +9,18 @@ class Utilizador
 		@notificacoes = Hash.new
 	end
 	
+	def setNome(nome)
+		@nome = nome
+	end
+	
+	def setEmail(email)
+		@email = email
+	end
+	
+	def update(id, odd)
+		@notificacoes[Time.new] = "A Odd do jogo #{id} foi alterada para #{odd.to_s}"
+	end
+	
 	def deposit(valor)
 		@saldo += valor
 	end

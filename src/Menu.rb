@@ -9,7 +9,7 @@ class Menu
 	end
 	
 	def self.menuBookie()
-		return show(['Logout','Criar Jogo','Alterar Jogo','Ver Jogos com Interesse','Ver Jogos Criados e Abertos','Ver Jogos Criados e Fechados','Alterar Dados Pessoais','Mostrar Interesse num Jogo'])
+		return show(['Logout','Criar Jogo','Introduzir Nova Odd num Jogo','Ver Jogos com Interesse','Ver Jogos Criados e Abertos','Ver Jogos Criados e Fechados','Alterar Dados Pessoais','Mostrar Interesse num Jogo','Consultar dados pessoais'])
 	end
 	
 	def self.menuAdministrador()
@@ -32,12 +32,11 @@ class Menu
 		odd = jogo.getRecentOdd()
 		
 		lista.push("Odd: #{odd.oddEmp} - Empate")
-		lista.push("Odd: #{odd.odd1} - Victória de #{jogo.equipa1.nome}")
-		lista.push("Odd: #{odd.odd2} - Victória de #{jogo.equipa2.nome}")
+		lista.push("Odd: #{odd.odd1} - Vitória de #{jogo.equipa1.nome}")
+		lista.push("Odd: #{odd.odd2} - Vitória de #{jogo.equipa2.nome}")
 		
 		return show(lista)
 	end
-	
 	
 	def self.show(menu)
 		while true do

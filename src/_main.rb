@@ -14,7 +14,7 @@ require_relative 'Utilizador.rb'
 def getValorAposta(util)
 	while(true)
 		valor = getFloat("Introduza o valor da aposta: ")
-		if(valor <= util.saldo & valor > 0)
+		if(valor <= util.saldo and valor > 0)
 			return valor
 		else
 			puts "Quantidade inválida"
@@ -44,6 +44,7 @@ def showMenuPrincipal()
 				#login utilizador
 				email = getString("Introduza o seu email:")
 				if @serv.loginUtilizador(email)
+					@serv.printNotificacoes()
 					showMenuUtilizador()
 				end
 			when 3
@@ -86,8 +87,14 @@ def showMenuUtilizador()
 				@serv.addAposta(ap)
 			when 2
 				#alterar dados pessoais
+				@serv.alterarDadosUti()
 			when 3
 				#consultar dados pessoais
+				@serv.printUtilizador()
+			when 4
+				#depositar dinheiro
+			when 5
+				#levantar dinheiro
 			else
 				printError(__method__)
 		end
@@ -105,18 +112,28 @@ def showMenuBookie()
 				exit = true
 			when 1
 				#novo jogo
+				@serv.menuCriarJogo()
 			when 2
-				#alterar jogo
+				#introduzir nova Odd num jogo
+				@serv.menuNovaOddJogo()
 			when 3
 				#ver interesse
+				@serv.printJogosInteresseBookie()
 			when 4
 				#ver criados abertos
+				@serv.printJogosBookieAbertos()
 			when 5
 				#ver criados fechados
+				@serv.printJogosBookieFechados()
 			when 6
 				#alterar dados pessoais
+				@serv.alterarDadosBookie()
 			when 7
 				#mostrar interesse
+				@serv.menuAdicionarInteresse()
+			when 8
+				#consultar dados
+				@serv.printBookie()
 			else
 				printError(__method__)
 		end
@@ -149,6 +166,7 @@ def showMenuAdministrador()
 		end
 	end
 end
+
 
 def addAll()
 	puts "--------------------->Inserindo entidades base"
