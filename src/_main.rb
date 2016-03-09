@@ -1,3 +1,5 @@
+require 'observer'
+
 require_relative 'Utils.rb'
 
 require_relative 'Aposta.rb'
@@ -20,7 +22,6 @@ def getValorAposta(util)
 			puts "Quantidade inválida"
 		end
 	end
-	
 end
 
 
@@ -57,6 +58,7 @@ def showMenuPrincipal()
 				#login bookie
 				email = getString("Introduza o seu email:")
 				if @serv.loginBookie(email)
+					#nao devia haver um print de notificacoes aqui tb?
 					showMenuBookie()
 				end
 			when 5

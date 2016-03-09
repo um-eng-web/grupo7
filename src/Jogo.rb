@@ -1,6 +1,3 @@
-require_relative 'Equipa.rb'
-require 'observer'
-
 class Jogo
 	include Observable
 	attr_accessor :id, :equipa1, :equipa2, :listaOdds, :aberto, :bookie, :data, :listaApostas, :resultadoFinal
@@ -22,16 +19,14 @@ class Jogo
 		puts "Odd: #{getRecentOdd().to_s} adicionada com sucesso"
 		changed
 		notify_observers(id, getRecentOdd())
-		
 	end
 	
 	def getRecentOdd()
-		#esta testado
 		return @listaOdds[@listaOdds.keys.sort[-1]]
 	end
 	
 	def to_s()
-		return "ID: #{@id}, Equipa1: #{@equipa1.to_s}, Equipa2: #{@equipa2.to_s}, Aberto?: #{@aberto},  Bookie: #{@bookie.to_s}, Data: #{@data}"
+		return "ID: #{@id}, Equipa1: #{@equipa1.to_s}, Equipa2: #{@equipa2.to_s}, Aberto?: #{@aberto}, Bookie: #{@bookie.to_s}, Data: #{@data}"
 	end
 	
 	def to_menu()

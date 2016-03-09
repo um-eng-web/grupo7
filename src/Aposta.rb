@@ -1,5 +1,3 @@
-require_relative 'Jogo.rb'
-
 class Aposta
 	attr_accessor :id, :valor, :odd, :resultadoEsperado, :data, :idJogo
 	

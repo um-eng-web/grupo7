@@ -1,11 +1,5 @@
-require_relative 'Equipa.rb'
-require_relative 'Jogo.rb'
-require_relative 'Aposta.rb'
-require 'observer'
-
 class Servico
 	attr_reader :listaUtilizadores, :listaBookies, :listaJogos, :listaJogosFechados, :listaEquipas, :listaApostas, :loggedIn
-	#attr_accessor :idJogos
 	
 	def initialize()
 		@listaUtilizadores = Hash.new
@@ -101,59 +95,52 @@ class Servico
 	def alterarDadosUti(ut=@loggedIn)
 		email = getString("Introduza o seu email:")
 		nome = getString("Introduza o seu nome:")
-		utilizador = @listaUtilizadores[ut.email]
-		utilizador.setEmail(email)
-		utilizador.setNome(nome)
-		@listaUtilizadores.delete(ut.email)
-		@listaUtilizadores[utilizador.email] = utilizador
-		puts "O novo mail é #{utilizador.email} e o nome é #{utilizador.nome}"
-		@loggedIn = @listaUtilizadores[utilizador.email]
+
+		@listaUtilizadores[email] = @listaUtilizadores.delete(ut.email)
+		
+		ut.setEmail(email)
+		ut.setNome(nome)
+		
+		puts "O novo mail é #{ut.email} e o nome é #{ut.nome}"
 	end
 	
 	def alterarDadosBookie(ut=@loggedIn)
 		email = getString("Introduza o seu email:")
 		nome = getString("Introduza o seu nome:")
-		bookie = @listaBookies[ut.email]
-		bookie.setEmail(email)
-		bookie.setNome(nome)
-		@listaBookies.delete(ut.email)
-		@listaBookies[bookie.email] = bookie
-		puts "O novo mail é #{bookie.email} e o nome é #{bookie.nome}"
-		@loggedIn = @listaBookies[bookie.email]
+
+		@listaBookies[email] = @listaBookies.delete(ut.email)
+		
+		ut.email = email
+		ut.nome = nome
+		
+		puts "O novo mail é #{ut.email} e o nome é #{ut.nome}"
 	end
 	
 	#Utilizador
 	def menuCarregarDinheiro(ut=@loggedIn)
-		puts "Que valor deseja introduzir?"
-		valor = gets.to_f
-		listaUtilizadores[ut.email].deposit(valor)
-		puts "Agora tem #{listaUtilizadores[ut.email].saldo}$ na sua conta"
+		valor = getFloat("Que valor deseja introduzir?\n")
+		ut.deposit(valor)
+		puts "Agora tem #{ut.saldo}$ na sua conta"
 	end
 	
 	def menuLevantarDinheiro(ut=@loggedIn)
 		begin
-			puts "Tem #{listaUtilizadores[ut.email].saldo}$ na sua conta. Que valor deseja levantar?"
-			valor = gets.to_f
-		end while(!(valor <= listaUtilizadores[ut.email].saldo))
-		listaUtilizadores[ut.email].withdraw(valor)
-		puts "Agora tem #{listaUtilizadores[ut.email].saldo}$ na sua conta"
+			valor = getFloat("Tem #{ut.saldo}$ na sua conta. Que valor deseja levantar?\n")
+		end while(!(valor <= ut.saldo))
+		
+		ut.withdraw(valor)
+		puts "Agora tem #{ut.saldo}$ na sua conta"
 	end
 	
 	#Bookie
 	def menuCriarJogo(ut=@loggedIn)
-		#lista = @listaEquipas
 		puts "Lista de equipas:"
 		printEquipas()
-		puts("Introduza o ID da equipa da casa: ")
-		id1 = gets.to_i
-		puts("Introduza o ID da equipa que joga fora: ")
-		id2 = gets.to_i
-		puts("Introduza a Odd de vitória da equipa da casa: ")
-		odd1 = gets.to_i
-		puts("Introduza a Odd de vitória da equipa forasteira: ")
-		odd2 = gets.to_i
-		puts("Introduza a Odd de empate: ")
-		oddx = gets.to_i
+		id1 = getInt("Introduza o ID da equipa da casa: ")
+		id2 = getInt("Introduza o ID da equipa que joga fora: ")
+		odd1 = getInt("Introduza a Odd de vitória da equipa da casa: ")
+		odd2 = getInt("Introduza a Odd de vitória da equipa forasteira: ")
+		oddx = getInt("Introduza a Odd de empate: ")
 		j = Jogo.new(listaEquipas[id1],listaEquipas[id2], ut)
 		j.addOdd(odd1,oddx,odd2)
 		addJogo(j)
@@ -163,15 +150,12 @@ class Servico
 		puts "Lista de Jogos abertos"
 		printJogosBookieAbertos()
 		begin
-			puts "Introduza o ID do jogo que deseja introduzir nova Odd:"
-			idj = gets.to_i
+			idj = getInt("Introduza o ID do jogo que deseja introduzir nova Odd: ")
 		end while (!listaJogos.has_key?(idj)) 
-		puts("Introduza a Odd de vitória da equipa da casa: ")
-		odd1 = gets.to_i
-		puts("Introduza a Odd de vitória da equipa forasteira: ")
-		odd2 = gets.to_i
-		puts("Introduza a Odd de empate: ")
-		oddx = gets.to_i
+		
+		odd1 = getInt("Introduza a Odd de vitória da equipa da casa: ")
+		odd2 = getInt("Introduza a Odd de vitória da equipa forasteira: ")
+		oddx = getInt("Introduza a Odd de empate: ")
 		listaJogos[idj].addOdd(odd1,oddx,odd2)
 	end
 	
@@ -179,10 +163,10 @@ class Servico
 		puts "Lista de Jogos abertos"
 		printJogosAbertosSemInteresse()
 		begin
-			puts "Introduza o ID do jogo que quer marcar interesse"
-			idj = gets.to_i
+			idj = getInt("Introduza o ID do jogo que quer marcar interesse: ")
 		end while ((ut.listaInteresse.has_key?(idj)) and (!listaJogos.has_key?(idj)))
-		listaBookies[ut.email].addInteresse(listaJogos[idj])
+		
+		ut.addInteresse(listaJogos[idj])
 		
 		printJogosInteresseBookie()
 	end
