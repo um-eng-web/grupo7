@@ -178,7 +178,7 @@ class Servico
 			return
 		else
 			ut.removeInteresse(listaJogos[id])
-			listaJogos[id].observers.delete(ut)
+			listaJogos[id].delete_observer(ut)
 		end
 	end
 	

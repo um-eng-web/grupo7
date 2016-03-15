@@ -58,7 +58,6 @@ def showMenuPrincipal()
 				#login bookie
 				email = getString("Introduza o seu email:")
 				if @serv.loginBookie(email)
-					#nao devia haver um print de notificacoes aqui tb?
 					@serv.printNotificacoes()
 					showMenuBookie()
 				end

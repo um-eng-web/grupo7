@@ -1,7 +1,7 @@
 class Jogo
 	include Observable
 	attr_accessor :id, :equipa1, :equipa2, :listaOdds, :aberto, :bookie, :data, :listaApostas, :resultadoFinal
-	attr_reader :observers
+	
 	def initialize(equipa1, equipa2, bookie)
 		@equipa1 = equipa1
 		@equipa2 = equipa2
