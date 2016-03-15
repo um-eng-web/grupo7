@@ -165,10 +165,21 @@ class Servico
 		begin
 			idj = getInt("Introduza o ID do jogo que quer marcar interesse: ")
 		end while ((ut.listaInteresse.has_key?(idj)) and (!listaJogos.has_key?(idj)))
-		
+		listaJogos[idj].add_observer(ut)
 		ut.addInteresse(listaJogos[idj])
 		
+		#printJogosInteresseBookie()
+	end
+	
+	def menuRetirarInteresse(ut=@loggedIn)
 		printJogosInteresseBookie()
+		id = getInt("Introduza o ID do jogo que deseja retirar interesse (0 se quer sair)")
+		if(id == 0) 
+			return
+		else
+			ut.removeInteresse(listaJogos[id])
+			listaJogos[id].observers.delete(ut)
+		end
 	end
 	
 	#PRINT
@@ -216,7 +227,7 @@ class Servico
 	
 	def printJogosAbertosSemInteresse(ut=@loggedIn)
 		@listaJogos.values.each do |value|
-			if(ut.email == value.bookie.email)
+			if(ut.email != value.bookie.email)
 				if(!ut.listaInteresse.has_key?(value.id))
 					puts value.to_s
 				end

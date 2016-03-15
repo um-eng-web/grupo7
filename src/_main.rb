@@ -59,6 +59,7 @@ def showMenuPrincipal()
 				email = getString("Introduza o seu email:")
 				if @serv.loginBookie(email)
 					#nao devia haver um print de notificacoes aqui tb?
+					@serv.printNotificacoes()
 					showMenuBookie()
 				end
 			when 5
@@ -81,6 +82,7 @@ def showMenuUtilizador()
 				exit = true
 			when 1
 				#lista jogos
+				puts "Lista de jogos disponiveis para apostas"
 				jogo = Menu.menuJogos(@serv)
 				resultado = Menu.menuOdd(jogo)
 				valor = getValorAposta(@serv.loggedIn)
@@ -122,7 +124,8 @@ def showMenuBookie()
 				@serv.menuNovaOddJogo()
 			when 3
 				#ver interesse
-				@serv.printJogosInteresseBookie()
+				#@serv.printJogosInteresseBookie()
+				@serv.menuRetirarInteresse()
 			when 4
 				#ver criados abertos
 				@serv.printJogosBookieAbertos()

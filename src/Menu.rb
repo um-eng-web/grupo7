@@ -22,8 +22,9 @@ class Menu
 		jogos.each do |jogo|
 			lista.push(jogo.to_menu)
 		end
-		
+		puts "Escolha um jogo da lista"
 		chosen = show(lista)
+		
 		return jogos.at(chosen)
 	end
 	
