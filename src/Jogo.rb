@@ -14,11 +14,22 @@ class Jogo
 		@listaApostas = Hash.new
 	end
 	
+	def fecharJogo()
+		@listaApostas.values.each do |value|
+			if(value.resultadoEsperado == resultadoFinal)
+				premio = value.valor*value.getOddApostada()
+				value.apostador.fecharAposta(premio)
+			else
+				value.apostador.fecharAposta(nil)
+			end
+		end
+	end
+	
 	def addOdd(odd1, oddX, odd2)
 		@listaOdds[Time.new] = Odd.new(odd1,oddX,odd2)
 		puts "Odd: #{getRecentOdd().to_s} adicionada com sucesso"
 		changed
-		notify_observers(id, getRecentOdd())
+		notify_observers("A Odd do jogo #{@id} foi alterada para #{getRecentOdd().to_s}")
 	end
 	
 	def getRecentOdd()

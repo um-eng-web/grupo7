@@ -13,7 +13,7 @@ class Menu
 	end
 	
 	def self.menuAdministrador()
-		return show(['Logout','Mostrar Utilizadores','Mostrar Bookies','Mostrar Jogos','Mostrar Apostas'])
+		return show(['Logout','Mostrar Utilizadores','Mostrar Bookies','Mostrar Jogos abertos','Mostrar Jogos Fechados','Mostrar Apostas'])
 	end
 	
 	def self.menuJogos(serv)
@@ -35,6 +35,16 @@ class Menu
 		lista.push("Odd: #{odd.oddEmp} - Empate")
 		lista.push("Odd: #{odd.odd1} - Vitória de #{jogo.equipa1.nome}")
 		lista.push("Odd: #{odd.odd2} - Vitória de #{jogo.equipa2.nome}")
+		
+		return show(lista)
+	end
+	
+	def self.menuResultado(jogo)
+		lista = Array.new
+		
+		lista.push("Empate")
+		lista.push("Vitória de #{jogo.equipa1.nome}")
+		lista.push("Vitória de #{jogo.equipa2.nome}")
 		
 		return show(lista)
 	end

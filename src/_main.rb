@@ -86,7 +86,7 @@ def showMenuUtilizador()
 				resultado = Menu.menuOdd(jogo)
 				valor = getValorAposta(@serv.loggedIn)
 				
-				ap = Aposta.new(valor,jogo,resultado)
+				ap = Aposta.new(@serv.loggedIn,valor,jogo,resultado)
 				@serv.addAposta(ap)
 			when 2
 				#alterar dados pessoais
@@ -141,7 +141,7 @@ def showMenuBookie()
 				@serv.printBookie()
 			when 9
 				#fechar jogo
-				
+				@serv.encerrarJogo()
 			else
 				printError(__method__)
 		end
@@ -164,9 +164,11 @@ def showMenuAdministrador()
 				#mostrar bookies
 				@serv.printBookies()
 			when 3
-				#mostrar jogos
+				#mostrar jogos abertos
 				@serv.printJogos()
 			when 4
+				@serv.printJogosFechados()
+			when 5
 				#mostrar apostas
 				@serv.printApostas()
 			else
@@ -219,15 +221,15 @@ def addAll()
 	@serv.addJogo(j3)
 	
 	ut1.deposit(101)
-	ap = Aposta.new(100,j,0)
+	ap = Aposta.new(ut1,100,j,0)
 	
 	ut3.deposit(300)
-	ap2 = Aposta.new(50,j,2)
-	ap3 = Aposta.new(100,j2,1)
+	ap2 = Aposta.new(ut3,50,j,2)
+	ap3 = Aposta.new(ut3,100,j2,1)
 	
-	@serv.addAposta(ap,ut1)
-	@serv.addAposta(ap2,ut3)
-	@serv.addAposta(ap3,ut3)
+	@serv.addAposta(ap)
+	@serv.addAposta(ap2)
+	@serv.addAposta(ap3)
 	
 	puts "--------------------->Entidades inseridas"
 end

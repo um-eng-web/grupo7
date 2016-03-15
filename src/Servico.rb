@@ -80,14 +80,15 @@ class Servico
 		@idEquipas += 1
 	end
 	
-	def addAposta(ap,ut=@loggedIn)
+	def addAposta(ap)
 		ap.id = @idApostas
 		
-		ut.withdraw(ap.valor)
+		ap.apostador.withdraw(ap.valor)
 		
 		@listaApostas[ap.id] = ap
+		@listaJogos[ap.idJogo].listaApostas[ap.id] = ap
 		puts "Aposta #{ap.id} inserida com sucesso"
-		listaJogos[ap.idJogo].add_observer(ut)
+		listaJogos[ap.idJogo].add_observer(ap.apostador)
 		@idApostas += 1
 	end
 	
@@ -180,6 +181,23 @@ class Servico
 		end
 	end
 	
+		
+	def encerrarJogo()
+		puts "Lista de jogos disponiveis"
+		jogo = Menu.menuJogos(self)
+		resultado = Menu.menuResultado(jogo)
+		
+		@listaJogos.delete(jogo.id)
+		
+		jogo.resultadoFinal = resultado
+		
+		jogo.fecharJogo()
+		
+		@listaJogosFechados[jogo.id] = jogo
+		
+		puts "Jogo encerrado com sucesso!"
+	end
+	
 	#PRINT
 	def printUtilizadores()
 		@listaUtilizadores.values.each do |value|
@@ -203,6 +221,12 @@ class Servico
 	
 	def printJogos()
 		@listaJogos.values.each do |value|
+			puts value.to_s
+		end
+	end
+	
+	def printJogosFechados()
+		@listaJogosFechados.values.each do |value|
 			puts value.to_s
 		end
 	end
@@ -250,10 +274,11 @@ class Servico
 	end
 	
 	def printNotificacoes(ut=@loggedIn)
-		puts "Lista de notificações"
-		ut.notificacoes.each do |value|
-			puts value
+		puts "Lista de notificações:"
+		ut.notificacoes.each do |key,value|
+			puts "[#{key}] #{value}"
 		end
+		puts "\n"
 	end
 	
 	def printEquipas()

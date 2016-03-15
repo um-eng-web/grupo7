@@ -1,5 +1,5 @@
 class Utilizador
-	attr_accessor :email, :nome, :saldo, :listaApostas, :notificacoes
+	attr_accessor :email, :nome, :saldo, :notificacoes
 	
 	def initialize(email, nome, saldo = 0.0)
 		@email = email
@@ -17,8 +17,18 @@ class Utilizador
 		@email = email
 	end
 	
-	def update(id, odd)
-		@notificacoes[Time.new] = "A Odd do jogo #{id} foi alterada para #{odd.to_s}"
+	def update(notif)
+		@notificacoes[Time.new] = notif
+	end
+	
+	def fecharAposta(premio)
+	
+		if(premio == nil)
+			notificacoes[Time.new] = "Um jogo onde apostou foi fechado mas você não ganhou a aposta\n"
+		else
+			deposit(premio)
+			notificacoes[Time.new] = "Parabéns ganhou #{premio} numa aposta\n"
+		end
 	end
 	
 	def deposit(valor)
