@@ -167,8 +167,6 @@ class Servico
 		end while ((ut.listaInteresse.has_key?(idj)) and (!listaJogos.has_key?(idj)))
 		listaJogos[idj].add_observer(ut)
 		ut.addInteresse(listaJogos[idj])
-		
-		#printJogosInteresseBookie()
 	end
 	
 	def menuRetirarInteresse(ut=@loggedIn)

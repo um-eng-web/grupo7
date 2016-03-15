@@ -122,8 +122,7 @@ def showMenuBookie()
 				#introduzir nova Odd num jogo
 				@serv.menuNovaOddJogo()
 			when 3
-				#ver interesse
-				#@serv.printJogosInteresseBookie()
+				#retirar interesse
 				@serv.menuRetirarInteresse()
 			when 4
 				#ver criados abertos
@@ -140,6 +139,9 @@ def showMenuBookie()
 			when 8
 				#consultar dados
 				@serv.printBookie()
+			when 9
+				#fechar jogo
+				
 			else
 				printError(__method__)
 		end
@@ -197,19 +199,35 @@ def addAll()
 	
 	eq1 = Equipa.new('Equipa X')
 	eq2 = Equipa.new('Equipa Y')
+	eq3 = Equipa.new('Equipa A')
+	eq4 = Equipa.new('Equipa B')
 	
 	@serv.addEquipa(eq1)
 	@serv.addEquipa(eq2)
+	@serv.addEquipa(eq3)
+	@serv.addEquipa(eq4)
 	
 	j = Jogo.new(eq1,eq2,boo1)
 	j.addOdd(1,2,3)
+	j2 = Jogo.new(eq4,eq3,boo1)
+	j2.addOdd(2,3,5)
+	j3 = Jogo.new(eq2,eq4,boo2)
+	j3.addOdd(4,2,3)
 	
 	@serv.addJogo(j)
+	@serv.addJogo(j2)
+	@serv.addJogo(j3)
 	
 	ut1.deposit(101)
 	ap = Aposta.new(100,j,0)
 	
+	ut3.deposit(300)
+	ap2 = Aposta.new(50,j,2)
+	ap3 = Aposta.new(100,j2,1)
+	
 	@serv.addAposta(ap,ut1)
+	@serv.addAposta(ap2,ut3)
+	@serv.addAposta(ap3,ut3)
 	
 	puts "--------------------->Entidades inseridas"
 end

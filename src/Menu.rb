@@ -9,7 +9,7 @@ class Menu
 	end
 	
 	def self.menuBookie()
-		return show(['Logout','Criar Jogo','Introduzir Nova Odd num Jogo','Ver Jogos com Interesse','Ver Jogos Criados e Abertos','Ver Jogos Criados e Fechados','Alterar Dados Pessoais','Mostrar Interesse num Jogo','Consultar dados pessoais'])
+		return show(['Logout','Criar Jogo','Introduzir Nova Odd num Jogo','Remover Interesse de Jogo','Ver Jogos Criados e Abertos','Ver Jogos Criados e Fechados','Alterar Dados Pessoais','Mostrar Interesse num Jogo','Consultar dados pessoais', 'Fechar Jogo'])
 	end
 	
 	def self.menuAdministrador()
