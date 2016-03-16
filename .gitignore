@@ -1,0 +1,114 @@
+
+# Created by https:/www.gitignore.io/api/rubymine,ruby,microsoftoffice
+
+### RubyMine ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
+# Reference: https:/intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff:
+BetESS/.idea/workspace.xml
+BetESS/.idea/tasks.xml
+BetESS/.idea/dictionaries
+BetESS/.idea/vcs.xml
+BetESS/.idea/jsLibraryMappings.xml
+
+# Sensitive or high-churn files:
+BetESS/.idea/dataSources.ids
+BetESS/.idea/dataSources.xml
+BetESS/.idea/dataSources.local.xml
+BetESS/.idea/sqlDataSources.xml
+BetESS/.idea/dynamic.xml
+BetESS/.idea/uiDesigner.xml
+
+# Gradle:
+BetESS/.idea/gradle.xml
+BetESS/.idea/libraries
+
+# Mongo Explorer plugin:
+BetESS/.idea/mongoSettings.xml
+
+## File-based project format:
+BetESS/*.iws
+
+## Plugin-specific files:
+
+# IntelliJ
+BetESS/out/
+
+# mpeltonen/sbt-idea plugin
+BetESS/.idea_modules/
+
+# JIRA plugin
+BetESS/atlassian-ide-plugin.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+BetESS/com_crashlytics_export_strings.xml
+BetESS/crashlytics.properties
+BetESS/crashlytics-build.properties
+BetESS/fabric.properties
+
+
+### Ruby ###
+BetESS/*.gem
+BetESS/*.rbc
+BetESS/.config
+BetESS/coverage/
+BetESS/InstalledFiles
+BetESS/pkg/
+BetESS/spec/reports/
+BetESS/spec/examples.txt
+BetESS/test/tmp/
+BetESS/test/version_tmp/
+BetESS/tmp/
+
+## Specific to RubyMotion:
+BetESS/.dat*
+BetESS/.repl_history
+BetESS/build/
+BetESS/*.bridgesupport
+BetESS/build-iPhoneOS/
+BetESS/build-iPhoneSimulator/
+
+## Specific to RubyMotion (use of CocoaPods):
+#
+# We recommend against adding the Pods directory to your .gitignore. However
+# you should judge for yourself, the pros and cons are mentioned at:
+# https:/guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
+#
+# vendor/Pods/
+
+## Documentation cache and generated files:
+BetESS/.yardoc/
+BetESS/_yardoc/
+BetESS/doc/
+BetESS/rdoc/
+
+## Environment normalization:
+BetESS/.bundle/
+BetESS/vendor/bundle
+BetESS/lib/bundler/man/
+
+# for a library or gem, you might want to ignore these files since the code is
+# intended to run in multiple environments; otherwise, check them in:
+# Gemfile.lock
+# .ruby-version
+# .ruby-gemset
+
+# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
+BetESS/.rvmrc
+
+
+### MicrosoftOffice ###
+*.tmp
+
+# Word temporary
+~$*.doc*
+
+# Excel temporary
+~$*.xls*
+
+# Excel Backup File
+*.xlk
+
+# PowerPoint temporary
+~$*.ppt*
