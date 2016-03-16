@@ -14,7 +14,8 @@ class Jogo
 		@listaApostas = Hash.new
 	end
 	
-	def fecharJogo()
+	def fecharJogo(resultado)
+		@resultadoFinal = resultado
 		@listaApostas.values.each do |value|
 			if(value.resultadoEsperado == resultadoFinal)
 				premio = value.valor*value.getOddApostada()
@@ -37,7 +38,7 @@ class Jogo
 	end
 	
 	def to_s()
-		return "ID: #{@id}, Equipa1: #{@equipa1.to_s}, Equipa2: #{@equipa2.to_s}, Aberto?: #{@aberto}, Bookie: #{@bookie.to_s}, Data: #{@data}"
+		return "ID: #{@id}, Equipa1: #{@equipa1.to_s}, Equipa2: #{@equipa2.to_s}, Aberto?: #{@aberto}, Bookie: #{@bookie.email}, Data: #{@data}"
 	end
 	
 	def to_menu()

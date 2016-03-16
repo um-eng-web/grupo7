@@ -148,7 +148,7 @@ class Servico
 	end
 	
 	def menuNovaOddJogo()
-		puts "Lista de Jogos abertos"
+		puts "Lista de Jogos abertos:"
 		printJogosBookieAbertos()
 		begin
 			idj = getInt("Introduza o ID do jogo que deseja introduzir nova Odd: ")
@@ -161,7 +161,7 @@ class Servico
 	end
 	
 	def menuAdicionarInteresse(ut=@loggedIn)
-		puts "Lista de Jogos abertos"
+		puts "Lista de Jogos abertos:"
 		printJogosAbertosSemInteresse()
 		begin
 			idj = getInt("Introduza o ID do jogo que quer marcar interesse: ")
@@ -182,20 +182,34 @@ class Servico
 	end
 	
 		
-	def encerrarJogo()
-		puts "Lista de jogos disponiveis"
-		jogo = Menu.menuJogos(self)
+	def encerrarJogo(boo = @loggedIn)
+		jogos = getJogosAbertosBookie(boo)
+		if(jogos.length == 0)
+			puts "Não tem jogos disponíveis para encerrar!"
+			return
+		end
+		puts "Lista de jogos disponiveis:"
+		jogo = Menu.menuJogos(jogos)
+		
 		resultado = Menu.menuResultado(jogo)
 		
 		@listaJogos.delete(jogo.id)
-		
-		jogo.resultadoFinal = resultado
-		
-		jogo.fecharJogo()
+
+		jogo.fecharJogo(resultado)
 		
 		@listaJogosFechados[jogo.id] = jogo
 		
 		puts "Jogo encerrado com sucesso!"
+	end
+	
+	def getJogosAbertosBookie(boo)
+		res = Hash.new
+		@listaJogos.each do |key,value|
+			if(boo.email == value.bookie.email)
+				res[key] = value
+			end
+		end
+		return res
 	end
 	
 	#PRINT

@@ -24,10 +24,10 @@ class Utilizador
 	def fecharAposta(premio)
 	
 		if(premio == nil)
-			notificacoes[Time.new] = "Um jogo onde apostou foi fechado mas você não ganhou a aposta\n"
+			notificacoes[Time.new] = "Um jogo onde apostou foi fechado mas você não ganhou a aposta"
 		else
 			deposit(premio)
-			notificacoes[Time.new] = "Parabéns ganhou #{premio} numa aposta\n"
+			notificacoes[Time.new] = "Parabéns ganhou #{premio} numa aposta"
 		end
 	end
 	

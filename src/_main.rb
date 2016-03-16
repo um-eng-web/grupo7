@@ -81,13 +81,18 @@ def showMenuUtilizador()
 				exit = true
 			when 1
 				#lista jogos
-				puts "Lista de jogos disponiveis para apostas"
-				jogo = Menu.menuJogos(@serv)
-				resultado = Menu.menuOdd(jogo)
-				valor = getValorAposta(@serv.loggedIn)
-				
-				ap = Aposta.new(@serv.loggedIn,valor,jogo,resultado)
-				@serv.addAposta(ap)
+				if(@serv.listaJogos.length == 0)
+					puts "Não há jogos disponéveis"	
+				else
+					puts "Lista de jogos disponiveis para apostas:"
+					jogo = Menu.menuJogos(@serv.listaJogos)
+
+					resultado = Menu.menuOdd(jogo)
+					valor = getValorAposta(@serv.loggedIn)
+					
+					ap = Aposta.new(@serv.loggedIn,valor,jogo,resultado)
+					@serv.addAposta(ap)
+				end
 			when 2
 				#alterar dados pessoais
 				@serv.alterarDadosUti()
